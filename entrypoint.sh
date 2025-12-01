@@ -90,7 +90,7 @@ if [[ $# -gt 0 && "$1" == -* ]]; then
             vargs=" $vargs --sync sshfs --host-ssh-port ${ssh_port}"
         fi
     fi
-    exec python3 "$WORKDIR/anyvm.py" --data-dir "${DATA_DIR}" "$@" ${vargs}
+    exec python3 "$WORKDIR/anyvm.py" --data-dir "${DATA_DIR}" ${vargs} "$@" 
 fi
 
 exec "$@"
