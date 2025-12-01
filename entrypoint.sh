@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+
+DATA_DIR="/data"
+
 detect_host_mounts() {
     local mounts=()
     while read -r source mount_point fstype _; do
@@ -14,7 +17,7 @@ detect_host_mounts() {
         esac
 
         case "$mount_point" in
-            /|/proc|/sys|/dev|/dev/*|/run|/run/*)
+            /|/proc|/sys|/dev|/dev/*|/run|/run/*|${DATA_DIR}|${DATA_DIR}/*)
                 continue
                 ;;
         esac
@@ -85,7 +88,7 @@ if [[ $# -gt 0 && "$1" == -* ]]; then
             vargs=" $vargs --sync sshfs --host-ssh-port ${ssh_port}"
         fi
     fi
-    exec python3 "$WORKDIR/anyvm.py" --workingdir "/data" "$@" ${vargs}
+    exec python3 "$WORKDIR/anyvm.py" --workingdir "${DATA_DIR}" "$@" ${vargs}
 fi
 
 exec "$@"
