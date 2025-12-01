@@ -31,6 +31,9 @@ RUN chmod +x ${WORKDIR}/entrypoint.sh ${WORKDIR}/anyvm.py && mkdir -p /data
 
 VOLUME [ "/data" ]
 
+# Default SSH port mapping for anyvm VMs
+EXPOSE 10022
+
 ENTRYPOINT ["/anyvm.org/entrypoint.sh"]
 CMD ["/bin/bash"]
 
