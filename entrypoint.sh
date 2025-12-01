@@ -4,6 +4,8 @@ set -e
 
 DATA_DIR="/data"
 
+echo "anyvm.org v${ANYVM_VER}"
+
 detect_host_mounts() {
     local mounts=()
     while read -r source mount_point fstype _; do
@@ -88,7 +90,7 @@ if [[ $# -gt 0 && "$1" == -* ]]; then
             vargs=" $vargs --sync sshfs --host-ssh-port ${ssh_port}"
         fi
     fi
-    exec python3 "$WORKDIR/anyvm.py" --workingdir "${DATA_DIR}" "$@" ${vargs}
+    exec python3 "$WORKDIR/anyvm.py" --data-dir "${DATA_DIR}" "$@" ${vargs}
 fi
 
 exec "$@"
