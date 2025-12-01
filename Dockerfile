@@ -34,6 +34,13 @@ VOLUME [ "/data" ]
 # Default SSH port mapping for anyvm VMs
 EXPOSE 10022
 
+# Default VNC port mapping for anyvm VMs
+EXPOSE 5900
+
+# qemu monitor port
+EXPOSE 7000
+
+
 ENTRYPOINT ["/anyvm.org/entrypoint.sh"]
 CMD ["/bin/bash"]
 
