@@ -52,6 +52,17 @@ docker run --rm -it \
 
 ```
 
+## 6. Enable KVM acceleration
+Map the host KVM device into the container with read-write access to allow hardware acceleration.
+```sh
+docker run --rm -it \
+  --device /dev/kvm:/dev/kvm:rw \
+  ghcr.io/anyvm-org/anyvm --os freebsd
+```
 
-## 6. More info
+
+## 7. More info
 See the [anyvm](https://github.com/anyvm-org/anyvm) project for available OS targets and options.
+
+
+
