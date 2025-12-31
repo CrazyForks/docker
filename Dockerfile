@@ -37,6 +37,9 @@ EXPOSE 10022
 # Default VNC port mapping for anyvm VMs
 EXPOSE 5900
 
+# Default Web VNC port mapping for anyvm VMs
+EXPOSE 6080
+
 # qemu monitor port
 EXPOSE 7000
 
