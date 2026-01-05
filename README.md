@@ -17,7 +17,7 @@ Run a FreeBSD VM instantly:
 docker run --rm -it ghcr.io/anyvm-org/anyvm --os freebsd
 ```
 > [!TIP]
-> Replace `--os freebsd` with your desired OS (e.g., `openbsd`, `netbsd`, `haiku`, `ubuntu`).
+> Replace `--os freebsd` with your desired OS (e.g., `openbsd`, `netbsd`, `haiku`).
 
 ---
 
