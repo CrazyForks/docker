@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["freebsd", "netbsd", "openbsd", "solaris", "dragonflybsd", "omnios", "openindiana"]
+        os: ["freebsd", "midnightbsd", "netbsd", "openbsd", "solaris", "dragonflybsd", "omnios", "openindiana"]
         arch: ["aarch64", ""]
         runs: ["ubuntu-24.04"]
         sync: ["scp", "rsync"]
@@ -31,6 +31,8 @@ jobs:
           - os: solaris
             arch: aarch64
           - os: dragonflybsd
+            arch: aarch64
+          - os: midnightbsd
             arch: aarch64
           - os: omnios
             arch: aarch64
@@ -51,13 +53,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["freebsd", "netbsd", "openbsd", "openindiana"]
+        os: ["freebsd", "midnightbsd", "netbsd", "openbsd", "openindiana"]
         arch: ["aarch64", ""]
         runs: ["ubuntu-24.04"]
         exclude:
           - os: solaris
             arch: aarch64
           - os: dragonflybsd
+            arch: aarch64
+          - os: midnightbsd
             arch: aarch64
           - os: omnios
             arch: aarch64
