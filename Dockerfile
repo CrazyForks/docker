@@ -13,12 +13,13 @@ RUN apt-get update && apt-get --no-install-recommends -y install \
     qemu-efi-aarch64 \
     rsync qemu-efi-riscv64 \
     qemu-system-riscv64 \
+    qemu-system-ppc \
     u-boot-qemu  \
     openssh-client \
     nfs-kernel-server \
     openssh-server dropbear
 
-ENV ANYVM_VER=0.4.2
+ENV ANYVM_VER=0.4.5
 
 WORKDIR /anyvm.org
 ENV WORKDIR=/anyvm.org
