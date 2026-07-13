@@ -19,7 +19,7 @@ RUN apt-get update && apt-get --no-install-recommends -y install \
     nfs-kernel-server \
     openssh-server dropbear
 
-ENV ANYVM_VER=0.4.5
+ENV ANYVM_VER=0.4.9
 
 WORKDIR /anyvm.org
 ENV WORKDIR=/anyvm.org

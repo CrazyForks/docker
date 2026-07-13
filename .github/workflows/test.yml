@@ -78,30 +78,34 @@ jobs:
 
 
 
-  # testnfs:
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: ["freebsd", "netbsd", "openbsd", "solaris", "dragonflybsd", "omnios", "openindiana"]
-  #       arch: ["aarch64", ""]
-  #       runs: ["ubuntu-24.04"]
-  #       exclude:
-  #         - os: solaris
-  #           arch: aarch64
-  #         - os: dragonflybsd
-  #           arch: aarch64
-  #         - os: omnios
-  #           arch: aarch64
-  #         - os: openindiana
-  #           arch: aarch64
+  # nfs is the container default sync mode (see entrypoint.sh). The
+  # NFSv3-only guests (openbsd, netbsd, dragonflybsd) need the nfsd
+  # portmapper on port 111; anyvm >= 0.4.9 probes that port and the
+  # container has no system rpcbind and runs as root, so it is bindable.
+  testnfs:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["freebsd", "netbsd", "openbsd", "solaris", "dragonflybsd", "omnios", "openindiana"]
+        arch: ["aarch64", ""]
+        runs: ["ubuntu-24.04"]
+        exclude:
+          - os: solaris
+            arch: aarch64
+          - os: dragonflybsd
+            arch: aarch64
+          - os: omnios
+            arch: aarch64
+          - os: openindiana
+            arch: aarch64
 
-  #   uses: ./.github/workflows/testrun.yml
-  #   secrets: inherit
-  #   with:
-  #     runs: ${{ matrix.runs }}
-  #     os: ${{ matrix.os }}
-  #     arch: ${{ matrix.arch }}
-  #     sync: nfs
+    uses: ./.github/workflows/testrun.yml
+    secrets: inherit
+    with:
+      runs: ${{ matrix.runs }}
+      os: ${{ matrix.os }}
+      arch: ${{ matrix.arch }}
+      sync: nfs
    
 
 

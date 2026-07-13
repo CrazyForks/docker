@@ -82,13 +82,23 @@ if [[ $# -gt 0 && "$1" == -* ]]; then
     done < <(detect_host_mounts)
     vargs="${volume_args[@]}"
     if [ "$vargs" ]; then
-        ssh_port=$(start_ssh_daemon)
-        if [ -z "$ssh_port" ]; then
-            echo "Warning: SSH daemon not running; sync sshfs may fail." >&2
-            vargs=" $vargs --sync sshfs"
-        else
-            vargs=" $vargs --sync sshfs --host-ssh-port ${ssh_port}"
-        fi
+        # Default sync mode: nfs (the user-space nfsd bundled with anyvm.py;
+        # no ssh daemon and no kernel nfsd needed). A --sync in "$@" comes
+        # later on the command line, so it overrides this default.
+        vargs=" $vargs --sync nfs"
+        # sshfs is the only sync mode that mounts the host from inside the
+        # guest over ssh, so it needs an ssh daemon in this container. Start
+        # one only when the caller explicitly requests sshfs.
+        case " $* " in
+            *" sshfs "*)
+                ssh_port=$(start_ssh_daemon) || true
+                if [ -z "$ssh_port" ]; then
+                    echo "Warning: SSH daemon not running; sync sshfs may fail." >&2
+                else
+                    vargs="$vargs --host-ssh-port ${ssh_port}"
+                fi
+                ;;
+        esac
     fi
     exec python3 "$WORKDIR/anyvm.py" --data-dir "${DATA_DIR}" ${vargs} "$@" 
 fi
